@@ -25,7 +25,7 @@ def screenCapture(deviceID, capPath):
     # # 删除截图
     command3 = f'{ adbPath } -s { deviceID } shell rm sdcard/adb_screenCap.png'
     # 执行
-    for row in [command1, command2]:
+    for row in [command1, command2, command3]:
         time.sleep(0.1)
         os.system(row)
     # 判断是否保存成功
