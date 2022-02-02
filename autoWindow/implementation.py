@@ -42,7 +42,7 @@ def scroll(clicks):
     pyautogui.scroll(-clicks)
 
 # 监听图片出现 并且 返回图片所在区块的中心坐标
-def watch(imgPath, duration ,intervalTime, threshold = 0.7):
+def watch(imgPath, duration = 60 ,intervalTime = 1, threshold = 0.7):
     print(f'当前动作 -> 监听图片出现， 监听时间 { duration }s')
     rangeNumber = ceil(duration / intervalTime)
     for i in range(rangeNumber):
@@ -56,7 +56,7 @@ def watch(imgPath, duration ,intervalTime, threshold = 0.7):
     print('监听期间未出现目标')
 
 # 监听图片出现 并且 返回满足条件图片全部中心坐标（自动去重）
-def watchALL(imgPath, duration ,intervalTime, threshold = 0.7):
+def watchALL(imgPath, duration = 60 ,intervalTime = 1, threshold = 0.7):
     print(f'当前动作 -> 监听图片出现， 监听时间 { duration }s')
     rangeNumber = ceil(duration / intervalTime)
     for i in range(rangeNumber):
