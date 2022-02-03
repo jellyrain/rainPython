@@ -19,7 +19,7 @@ def longClick(deviceID, x, y, second):
     longTouch(deviceID, x, y, second * 1000)
 
 # 监听图片出现 并且 返回图片所在区块的中心坐标
-def watch(deviceID, imgPath, duration ,intervalTime, threshold = 0.7):
+def watch(deviceID, imgPath, duration ,intervalTime, threshold):
     print(f'当前动作 -> 监听图片出现， 监听时间 { duration }s')
     rangeNumber = ceil(duration / intervalTime)
     for i in range(rangeNumber):
@@ -33,14 +33,14 @@ def watch(deviceID, imgPath, duration ,intervalTime, threshold = 0.7):
     print('监听期间未出现目标')
 
 # 监听图片出现 并且 点击
-def watchAndClick(deviceID, imgPath, duration ,intervalTime, threshold = 0.7):
+def watchAndClick(deviceID, imgPath, duration ,intervalTime, threshold):
     pos = watch(deviceID, imgPath, duration ,intervalTime, threshold)
     if pos == None: return
     x, y = pos
     click(deviceID, x, y)
 
 # 根据两张图片滑动操作
-def imgAndSlide(deviceID, imgPath1, imgPath2, second, threshold = 0.7):
+def imgAndSlide(deviceID, imgPath1, imgPath2, second, threshold):
     pos1 = watch(deviceID, imgPath1, 0.1, 0.1, threshold)
     if pos1 == None: return
     pos2 = watch(deviceID, imgPath2, 0.1, 0.1, threshold)
@@ -50,7 +50,7 @@ def imgAndSlide(deviceID, imgPath1, imgPath2, second, threshold = 0.7):
     slide(deviceID, x1, y1, x2, y2, second)
 
 # 监听图片出现 未出现 滑动 出现 返回图片所在区块的中心坐标
-def watchNotSlide(deviceID, imgPath, x1, y1, x2, y2, second, maxnumber = 20, threshold = 0.7):
+def watchNotSlide(deviceID, imgPath, x1, y1, x2, y2, second, maxnumber, threshold):
     for i in range(maxnumber):
         pos = watch(deviceID, imgPath, 0.1, 0.1, threshold)
         if pos != None: return pos
@@ -58,14 +58,14 @@ def watchNotSlide(deviceID, imgPath, x1, y1, x2, y2, second, maxnumber = 20, thr
     print('滑动监听已达到上限，但未出现目标')
 
 # 监听图片出现 未出现 滑动 出现 点击
-def watchNotSlideAndClient(deviceID, imgPath, x1, y1, x2, y2, second, maxnumber = 20, threshold = 0.7):
+def watchNotSlideAndClient(deviceID, imgPath, x1, y1, x2, y2, second, maxnumber, threshold):
     pos = watchNotSlide(deviceID, imgPath, x1, y1, x2, y2, second, maxnumber, threshold)
     if pos == None: return
     x, y = pos
     click(deviceID, x, y)
 
 # 监听多张图片是否出现 出现一张就返回 或运算
-def watchOrImgs(deviceID, imgPaths, duration ,intervalTime, threshold = 0.7):
+def watchOrImgs(deviceID, imgPaths, duration ,intervalTime, threshold):
     for imgPath in imgPaths:
         pos = watch(deviceID, imgPath, duration ,intervalTime, threshold)
         if pos != None: return pos
@@ -76,7 +76,7 @@ def sleep(second):
     time.sleep(second)
 
 # 随机等待
-def randomSleep(endSecond, startSecond = 0):
-    time.sleep(random.randint(startSecond, endSecond))
+def randomSleep(endSecond, startSecond):
+    time.sleep(round(random.uniform(startSecond, endSecond), 1))
 
 __all__ = ['click', 'watch', 'slide', 'longClick', 'watchAndClick', 'imgAndSlide', 'watchNotSlide', 'watchNotSlideAndClient', 'watchOrImgs', 'sleep', 'randomSleep']

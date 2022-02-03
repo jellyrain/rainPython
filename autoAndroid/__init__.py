@@ -5,7 +5,6 @@ class Carriers:
    # 初始化
    def __init__(self, deviceID):
       self.deviceID = deviceID
-      print(connectAdb(self.deviceID))
    
    # ADB 连接设备
    @staticmethod
@@ -31,11 +30,11 @@ class Carriers:
       return watch(self.deviceID, imgPath, duration, intervalTime, threshold)
 
    # 长按点击
-   def longTouche(self, x, y, second):
+   def longTouche(self, x, y, second = 3):
       longClick(self.deviceID, x, y, second)
 
    # 滑动操作
-   def slide(self,  x1, y1, x2, y2, second):
+   def slide(self,  x1, y1, x2, y2, second = 1):
       slide(self.deviceID, x1, y1, x2, y2, second)
 
    # 监听图片出现 并且 点击
@@ -43,15 +42,15 @@ class Carriers:
       watchAndClick(self.deviceID, imgPath, duration ,intervalTime, threshold)
    
    # 根据两张图片滑动操作 两个点都是 图片中心点
-   def imgAndSlide(self, imgPath1, imgPath2, second, threshold = 0.7):
+   def imgAndSlide(self, imgPath1, imgPath2, second = 1, threshold = 0.7):
       imgAndSlide(self.deviceID, imgPath1, imgPath2, second, threshold)
 
    # 监听图片出现 未出现 滑动 出现 返回图片所在区块的中心坐标
-   def watchNotSlide(self, imgPath, x1, y1, x2, y2, second, maxnumber = 20, threshold = 0.7):
+   def watchNotSlide(self, imgPath, x1, y1, x2, y2, second = 1, maxnumber = 20, threshold = 0.7):
       return watchNotSlide(self.deviceID, imgPath, x1, y1, x2, y2, second, maxnumber, threshold)
 
    # 监听图片出现 未出现 滑动 出现 点击
-   def watchNotSlideAndTouche(self, imgPath, x1, y1, x2, y2, second, maxnumber = 20, threshold = 0.7):
+   def watchNotSlideAndTouche(self, imgPath, x1, y1, x2, y2, second = 1, maxnumber = 20, threshold = 0.7):
       watchNotSlideAndClient(self.deviceID, imgPath, x1, y1, x2, y2, second, maxnumber, threshold)
 
    # 监听多张图片是否出现 出现一张就返回 或运算
@@ -59,11 +58,11 @@ class Carriers:
       return watchOrImgs(self.deviceID, imgPaths, duration, intervalTime, threshold)
 
    # 等待
-   def sleep(self, second):
+   def sleep(self, second = 1):
       sleep(second)
 
    # 随机等待
-   def randomSleep(self, endSecond, startSecond = 0):
+   def randomSleep(self, endSecond = 2, startSecond = 0):
       randomSleep(endSecond, startSecond)
 
    # 修改 device
