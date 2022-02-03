@@ -62,6 +62,10 @@ class Carriers:
    def sleep(self, second):
       sleep(second)
 
+   # 随机等待
+   def randomSleep(self, endSecond, startSecond = 0):
+      randomSleep(endSecond, startSecond)
+
    # 修改 device
    def deviceID(self, deviceID):
       self.deviceID = deviceID

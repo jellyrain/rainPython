@@ -1,4 +1,5 @@
 from math import ceil
+import random
 import time
 from autoAndroid.api import *
 
@@ -74,4 +75,8 @@ def sleep(second):
     print(f'当前动作 -> 等待， 等待时间 { second }s')
     time.sleep(second)
 
-__all__ = ['click', 'watch', 'slide', 'longClick', 'watchAndClick', 'imgAndSlide', 'watchNotSlide', 'watchNotSlideAndClient', 'watchOrImgs', 'sleep']
+# 随机等待
+def randomSleep(endSecond, startSecond = 0):
+    time.sleep(random.randint(startSecond, endSecond))
+
+__all__ = ['click', 'watch', 'slide', 'longClick', 'watchAndClick', 'imgAndSlide', 'watchNotSlide', 'watchNotSlideAndClient', 'watchOrImgs', 'sleep', 'randomSleep']
