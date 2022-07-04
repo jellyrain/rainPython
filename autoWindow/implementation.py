@@ -7,7 +7,7 @@ from autoWindow.api import *
 pyautogui.FAILSAFE = True
 
 # 鼠标移动
-def mouseMove(x, y, duration):
+def mouseMove(x, y, duration = 0.5):
     print(f'当前动作 -> 鼠标移动({ x }, { y })， 持续时间 { duration }s')
     pyautogui.moveTo(x, y, duration)
 
