@@ -77,6 +77,7 @@ def copy(string):
 # 粘贴剪贴板语句
 def paste():
     string = pyperclip.paste()
+    pyautogui.hotkey('Ctrl','v')
     print(f'当前动作 -> 粘贴剪贴板语句, 粘贴语句 { string }')
 
 __all__ = ['mouseMove', 'leftClick', 'rightClick', 'middleClick', 'doubleClick', 'dragTo', 'scroll', 'watch', 'watchAll', 'copy', 'paste']
