@@ -9,3 +9,7 @@
 ## autoWindow
 
 依赖：opencv-python pyautogui Pillow
+
+## vacc
+
+依赖：ffmpeg 将下载的 exe 放到 vacc\ff 下
