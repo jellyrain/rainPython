@@ -4,6 +4,10 @@ import random, math
 def zero_to_one_prizes():
     return random.random()
 
+# 随机返回 指定范围的值
+def random_range_prizes(start, end, is_float=False):
+    return random.uniform(start, end) if is_float else random.randint(start, end)
+
 # 随机返回数组中的一个值
 def one_value_prizes(arr):
     return random.choice(arr)
