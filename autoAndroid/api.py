@@ -6,15 +6,31 @@ adbPath = r'autoAndroid\adb\adb.exe'
 
 # 连接设备
 def connectAdb(deviceID):
-    return os.popen(f'{ adbPath } connect { deviceID }').read()
+    result = os.popen(f'{ adbPath } connect { deviceID }')
+    string = result.read()
+    result.close()
+    return string
 
 # 获取设备列表，每一个为deviceID
 def getDevices():
-    return os.popen(f'{ adbPath } devices').read()
+    result = os.popen(f'{ adbPath } devices')
+    string = result.read()
+    result.close()
+    return string
+
+# 获取设备列表，每一个为deviceID 按行数组返回
+def getDevicesList():
+    result = os.popen(f'{ adbPath } devices')
+    string = result.readlines()
+    result.close()
+    return string
 
 # 杀死ADB进程
 def killAdb():
-    return os.popen(f'{ adbPath } kill-server')
+    result = os.popen(f'{ adbPath } kill-server')
+    string = result.read()
+    result.close()
+    return string
 
 # 设备屏幕截图，需给定did和本机截图保存路径
 def screenCapture(deviceID, capPath):
@@ -79,4 +95,4 @@ def comparison (deviceID, imgPath, threshold):
     if pos == None: return None
     return centerOfTouchArea(imgPath, pos)
 
-__all__ = ['connectAdb', 'getDevices', 'killAdb', 'screenCapture', 'touch', 'sliding', 'longTouch', 'comparison']
+__all__ = ['connectAdb', 'getDevices', 'getDevicesList', 'killAdb', 'screenCapture', 'touch', 'sliding', 'longTouch', 'comparison']

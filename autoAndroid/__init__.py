@@ -1,4 +1,5 @@
-from autoAndroid.api import connectAdb, getDevices, killAdb
+import re
+from autoAndroid.api import connectAdb, getDevices, getDevicesList, killAdb
 from autoAndroid.implementation  import *
 
 class Carriers:
@@ -9,17 +10,30 @@ class Carriers:
    # ADB 连接设备
    @staticmethod
    def connectAdb(deviceID):
-      print(connectAdb(deviceID))
+      return connectAdb(deviceID)
 
    # 获取设备列表，每一个为 deviceID 并且 打印结果
    @staticmethod
    def getDevices():
-      print(getDevices())
+      return getDevices()
 
    # 杀死ADB进程 并且 打印结果
    @staticmethod
    def killAdb():
-      print(killAdb())
+      return killAdb()
+
+   # 自动连接 第一个 device 状态的设备，如果一个都没有就返回 None
+   @staticmethod
+   def autoConnect():
+      list_str = getDevicesList()
+      if len(list_str) == 0: return None
+      list_str = filter(lambda x: re.findall(r'device(?=[^s])', x) != [], list_str)
+      list_str = list(list_str)
+      if len(list_str) == 0: return None
+      deviceID = list_str[0].split('\t')[0]
+      print('当前连接的设备 deviceID 为：' + deviceID)
+      return Carriers(deviceID)
+      
 
    # 点击指定坐标位置
    def touch(self, x, y):

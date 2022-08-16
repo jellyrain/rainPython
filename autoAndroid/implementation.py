@@ -20,7 +20,8 @@ def longClick(deviceID, x, y, second):
 
 # 监听图片出现 并且 返回图片所在区块的中心坐标
 def watch(deviceID, imgPath, duration ,intervalTime, threshold):
-    print(f'当前动作 -> 监听图片出现， 监听时间 { duration }s')
+    img = imgPath.split('/')[-1]
+    print(f'当前动作 -> 监听图片出现， 监听时间 { duration }s， 监听图片 { img }')
     rangeNumber = ceil(duration / intervalTime)
     for i in range(rangeNumber):
         print(f'开始匹配：第{ i + 1 }次， 一共{ rangeNumber }次')
