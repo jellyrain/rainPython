@@ -17,3 +17,7 @@
 ## encrypt
 
 依赖：rsa pycryptodome
+
+## bot
+
+依赖：go-cqhttp（自行登录账号 非 python 库）sqlite3 requests flask
