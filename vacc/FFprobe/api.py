@@ -1,6 +1,8 @@
-import os, json
+import json
+import os
 
 from vacc.FFprobe.config import FFPROBE_PATH
+
 
 class FFprobe:
     def __init__(self, path: str = FFPROBE_PATH):

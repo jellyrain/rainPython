@@ -1,23 +1,23 @@
-# rainPython
+## 1. rain_auto 自动化包（window， android）
 
-## autoAndroid
+依赖：`opencv-python` `pywin32` `Pillow` `pyautogui`
 
-依赖：opencv-python
+## 2. encrypt 加密包
 
-实用工具：captureMarkHelper.py
+依赖：`rsa` `pycryptodome`
 
-## autoWindow
+## 3. bot QQ机器人包
 
-依赖：opencv-python pyautogui Pillow
+依赖：go-cqhttp（自行登录账号 非 python 库）`sqlite3` `requests` `flask`
 
-## vacc
+## 4. content 内容包（大部分文件都可以单独使用）
 
-依赖：ffmpeg 将下载的 exe 放到 vacc\ff 下
+随机、id生成、文件监听、文件操作、词法分析、excel操作
 
-## encrypt
+词法分析 依赖：`fuzzywuzzy`
 
-依赖：rsa pycryptodome
+excel操作 依赖：`openpyxl` 词法分析的依赖
 
-## bot
+## 5. sql_faker 假数据包
 
-依赖：go-cqhttp（自行登录账号 非 python 库）sqlite3 requests flask
+依赖：`faker` 内容包的随机`prizes`文件（内置且也暴露方法）

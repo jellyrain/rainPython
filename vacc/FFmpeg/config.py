@@ -1,5 +1,5 @@
 # ffmpeg 路径
-FFMPEG_PATH = r'vacc\ff\ffmpeg.exe'
+FFMPEG_PATH = r'vacc\FF\ffmpeg.exe'
 
 
 # 预设类

@@ -31,4 +31,4 @@ class QQBot:
         self.app.run(host=self.host, port=self.port)
 
 
-__all__ = ['QQBot']
+version = '1.0.0'
