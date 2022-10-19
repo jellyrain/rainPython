@@ -21,7 +21,10 @@ def get_all_table(sqlserver: SqlServer) -> list[str]:
 
 def get_column_table(sqlserver: SqlServer, table_name: str) -> list[dict[str, str]]:
     """ 获取 sqlserver 数据库中表的字段 """
-    sql = f"SELECT COLUMN_NAME, ORDINAL_POSITION, IS_NULLABLE, DATA_TYPE, CHARACTER_OCTET_LENGTH FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{table_name}'"
+    sql = f"""SELECT COLUMN_NAME, ORDINAL_POSITION, IS_NULLABLE, DATA_TYPE, CHARACTER_OCTET_LENGTH 
+FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE TABLE_NAME = '{table_name}'   
+"""
     return [{
         "column_name": i[0],
         "ordinal_position": i[1],
@@ -65,8 +68,7 @@ def get_all_trigger(sqlserver: SqlServer) -> list[str]:
 
 def get_table_ddl(sqlserver: SqlServer, table_name: str) -> str:
     """ 获取 sql server 一张表的 ddl 语句 """
-    sql = f"""
-select 'create table [' + so.name + '] (' + o.list + ')' + CASE
+    sql = f"""select 'create table [' + so.name + '] (' + o.list + ')' + CASE
                                                                        WHEN tc.Constraint_Name IS NULL THEN ''
                                                                        ELSE 'ALTER TABLE ' + so.Name +
                                                                             ' ADD CONSTRAINT ' + tc.Constraint_Name +

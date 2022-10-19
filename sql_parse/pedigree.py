@@ -5,6 +5,7 @@ from sqllineage.runner import LineageRunner
 
 class column_parse:
     """ 解析 column """
+
     def __init__(self, column: Column) -> None:
         self.__database = None
         self.__table_name = None
@@ -43,7 +44,7 @@ class column_parse:
         return json.dumps(self.dict())
 
 
-def column_lineage(columns: tuple[Column, ...]) -> dict[str, str | None]:
+def column_pedigree(columns: tuple[Column, ...]) -> dict[str, str | None]:
     """ 单字段血缘 """
     data = None
     current = None
@@ -57,7 +58,7 @@ def column_lineage(columns: tuple[Column, ...]) -> dict[str, str | None]:
     return data
 
 
-def table_lineage(sql: str) -> list[dict[str, str | None]]:
+def table_pedigree(sql: str) -> list[dict[str, str | None]]:
     """ 表级血缘 """
     data = []
     for columns in LineageRunner(sql).get_column_lineage():
@@ -65,4 +66,12 @@ def table_lineage(sql: str) -> list[dict[str, str | None]]:
     return data
 
 
-__all__ = ['table_lineage']
+def pedigree(sql: str, is_json: bool = False) -> list[dict[str, str | None]] | str:
+    """ sql 血缘 is_json 是否返回 json """
+    data = []
+    for columns in LineageRunner(sql).get_column_lineage():
+        data.append(column_lineage(columns))
+    return data if not is_json else json.dumps(data, indent=4, ensure_ascii=False)
+
+
+__all__ = ['pedigree']
