@@ -25,3 +25,5 @@ excel 操作 依赖：`openpyxl` 词法分析的依赖
 ## 6. sql_parse 数据库 连接、格式化、获取语句和血缘 包（当前支持 sql server）
 
 依赖：`sqllineage` `pymssql(sql server 驱动)`
+
+## 7. vacc 视频剪辑和转码库

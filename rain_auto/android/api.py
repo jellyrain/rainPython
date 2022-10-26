@@ -1,5 +1,4 @@
 import os
-import re
 import cv2
 import time
 
@@ -22,12 +21,20 @@ def get_devices():
     return string
 
 
-def get_devices_list():
+def get_devices_list() -> list[dict[str, str]]:
     """ 获取设备列表，每一个为deviceID 按行数组返回 """
     result = os.popen(f'{adbPath} devices')
     string = result.readlines()
     result.close()
-    return string
+    arr = []
+    for item in string[1:]:
+        if item.strip() != '':
+            temp = item.strip().split('\t')
+            arr.append({
+                'id': temp[0],
+                'state': temp[1]
+            })
+    return arr
 
 
 def kill_adb():
@@ -40,16 +47,51 @@ def kill_adb():
 
 def get_first_devices_id():
     """ 自动寻找第一个 device 设备的id """
-    list_str = get_devices_list()
-    if len(list_str) == 0:
+    arr = get_devices_list()
+    if len(arr) == 0:
         return None
-    list_str = filter(lambda x: re.findall(r'device(?=[^s])', x) != [], list_str)
+    list_str = filter(lambda x: x['state'] == 'device', list_str)
     list_str = list(list_str)
     if len(list_str) == 0:
         return None
-    deviceID = list_str[0].split('\t')[0]
+    deviceID = list_str[0]['id']
     return deviceID
 
+def install_apk(deviceID, apkPath):
+    """ 安装apk """
+    command = f'{adbPath} -s {deviceID} install {apkPath}'
+    os.system(command)
+
+def uninstall_apk(deviceID, packageName):
+    """ 卸载apk """
+    command = f'{adbPath} -s {deviceID} uninstall {packageName}'
+    os.system(command)
+
+def get_package_name(deviceID, apkPath):
+    """ 获取 apk 包名 """
+    command = f'{adbPath} -s {deviceID} shell dumpsys package {apkPath}'
+    result = os.popen(command)
+    string = result.read()
+    result.close()
+    return string
+
+def start_app(deviceID, apkPath):
+    """ 启动app """
+    command = f'{adbPath} -s {deviceID} shell am start -n {apkPath}'
+    os.system(command)
+
+def stop_app(deviceID, apkPath):
+    """ 停止app """
+    command = f'{adbPath} -s {deviceID} shell am force-stop {apkPath}'
+    os.system(command)
+
+def get_screen_size(deviceID):
+    """ 获取屏幕分辨率 """
+    command = f'{adbPath} -s {deviceID} shell wm size'
+    result = os.popen(command)
+    string = result.read()
+    result.close()
+    return string
 
 def screen_capture(deviceID, capPath):
     """ 设备屏幕截图，需给定did和本机截图保存路径 """
@@ -120,5 +162,5 @@ def comparison(deviceID, imgPath, threshold):
     return center_of_touch_area(imgPath, pos)
 
 
-__all__ = ['connectAdb', 'get_devices', 'get_devices_list', 'kill_adb', 'get_first_devices', 'screen_capture', 'touch',
+__all__ = ['connectAdb', 'get_devices', 'get_devices_list', 'kill_adb', 'get_first_devices_id', 'screen_capture', 'touch',
            'sliding', 'long_touch', 'comparison']
