@@ -8,7 +8,7 @@ adbPath = r'rain_auto\android\adb\adb.exe'
 def connectAdb(deviceID):
     """ 连接设备 """
     result = os.popen(f'{adbPath} connect {deviceID}')
-    string = result.read()
+    string = result.buffer.read().decode('utf-8')
     result.close()
     return string
 
@@ -16,7 +16,7 @@ def connectAdb(deviceID):
 def get_devices():
     """ 获取设备列表，每一个为deviceID """
     result = os.popen(f'{adbPath} devices')
-    string = result.read()
+    string = result.buffer.read().decode('utf-8')
     result.close()
     return string
 
@@ -50,7 +50,7 @@ def get_first_devices_id():
     arr = get_devices_list()
     if len(arr) == 0:
         return None
-    list_str = filter(lambda x: x['state'] == 'device', list_str)
+    list_str = filter(lambda x: x['state'] == 'device', arr)
     list_str = list(list_str)
     if len(list_str) == 0:
         return None

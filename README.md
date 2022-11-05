@@ -26,4 +26,8 @@ excel 操作 依赖：`openpyxl` 词法分析的依赖
 
 依赖：`sqllineage` `pymssql(sql server 驱动)`
 
-## 7. vacc 视频剪辑和转码库
+## 7. vacc 视频剪辑和转码包
+
+## 8. timer 定时器包
+
+依赖：`schedule`
