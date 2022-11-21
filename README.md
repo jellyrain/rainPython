@@ -1,6 +1,8 @@
-## 1. rain_auto 自动化包（window， android）
+## 1. 自动化包（android, windows）
 
-依赖：`opencv-python` `pywin32` `Pillow` `pyautogui`
+android依赖：`opencv-python`
+
+windows依赖：`opencv-python` `pywin32` `Pillow` `pyautogui`
 
 ## 2. encrypt 加密包
 
