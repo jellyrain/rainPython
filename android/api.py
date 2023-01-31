@@ -50,7 +50,7 @@ def get_first_devices_id() -> str:
     arr = get_devices_list()
     if len(arr) == 0:
         return None
-    list_str = filter(lambda x: x['state'] == 'device', list_str)
+    list_str = filter(lambda x: x['state'] == 'device', arr)
     list_str = list(list_str)
     if len(list_str) == 0:
         return None
